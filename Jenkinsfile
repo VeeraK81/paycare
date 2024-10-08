@@ -16,22 +16,32 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/VeeraK81/paycare.git'
             }
         }
-        stage('Install Dependencies') {
+        
+        stage('Run Tests') {
             steps {
-                sh 'python -m pip install -r requirements.txt'
-            }
-        }
-        stage('Run Unit Tests') {
-            steps {
-                sh 'pytest tests/tests.py --junitxml=unit-tests.xml'
-                // sh 'pytest --junitxml=unit-tests.xml'
-            }
-            post {
-                always {
-                    junit 'unit-tests.xml'  // Publish test results
+                script {
+                    docker.image('paycare_etl:latest').inside {
+                        sh 'pytest tests/tests.py --junitxml=unit-tests.xml'
+                    }
                 }
             }
         }
+        stage('Archive Results') {
+            steps {
+                junit 'unit-tests.xml'
+            }
+        }
+        // stage('Run Unit Tests') {
+        //     steps {
+        //         sh 'pytest tests/tests.py --junitxml=unit-tests.xml'
+        //         // sh 'pytest --junitxml=unit-tests.xml'
+        //     }
+        //     post {
+        //         always {
+        //             junit 'unit-tests.xml'  // Publish test results
+        //         }
+        //     }
+        // }
         // stage('Build Docker Image') {
         //     steps {
         //         sh 'docker build -t ${DOCKER_IMAGE} .'
