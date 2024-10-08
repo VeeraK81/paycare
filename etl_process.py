@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 # Step 1: Extract
 def extract_data(file_path):
     """Extracts data from a CSV file."""

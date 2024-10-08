@@ -10,8 +10,8 @@ COPY . /app
 # Install the Python dependencies
 RUN pip install -r requirements.txt
 
-# Make a volume mount point for the input/output CSV files
-VOLUME ["/app/input_data.csv", "/app/output_data.csv"]
+# # Make a volume mount point for the input/output CSV files
+# VOLUME ["/app/input_data.csv", "/app/output_data.csv"]
 
 
 # Run the application (by default, run the main ETL process)
