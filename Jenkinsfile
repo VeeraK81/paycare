@@ -47,19 +47,19 @@ pipeline {
         //         sh 'docker build -t ${DOCKER_IMAGE} .'
         //     }
         // }
-        stage('Run Docker Container') {
-            steps {
-                script {
-                    docker.image('simple-scraper-veera:latest').inside {
+        // stage('Run Docker Container') {
+        //     steps {
+        //         script {
+        //             docker.image('simple-scraper-veera:latest').inside {
 
-                    // Create input data file dynamically
-                    sh 'echo "employee_id,employee_name,salary\n101,Alice,5000\n102,Bob,7000" > input_data.csv'
+        //             // Create input data file dynamically
+        //             sh 'echo "employee_id,employee_name,salary\n101,Alice,5000\n102,Bob,7000" > input_data.csv'
 
-                    // Run the Docker container with mounted input/output files
-                    sh 'docker run --rm -v $(pwd)/input_data.csv:/app/input_data.csv -v $(pwd)/output_data.csv:/app/output_data.csv ${DOCKER_IMAGE}'
-                    }
-                }
-            }
+        //             // Run the Docker container with mounted input/output files
+        //             sh 'docker run --rm -v $(pwd)/input_data.csv:/app/input_data.csv -v $(pwd)/output_data.csv:/app/output_data.csv ${DOCKER_IMAGE}'
+        //             }
+        //         }
+        //     }
         }
         // stage('Build Docker Image') {
         //     steps {
