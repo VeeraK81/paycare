@@ -4,6 +4,13 @@ pipeline {
         DOCKER_IMAGE = 'paycare-etl'
     }
     stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build('paycare_etl:latest')
+                }
+            }
+        }
         stage('Clone repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/VeeraK81/paycare.git'
@@ -25,11 +32,11 @@ pipeline {
                 }
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t ${DOCKER_IMAGE} .'
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //         sh 'docker build -t ${DOCKER_IMAGE} .'
+        //     }
+        // }
         stage('Run Docker Container') {
             steps {
                 script {
