@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     docker.image('paycare_etl:latest').inside {
-                        sh 'pytest tests/tests.py --junitxml=unit-tests.xml'
+                        sh 'pytest tests/test_etl.py --junitxml=unit-tests.xml'
                     }
                 }
             }
