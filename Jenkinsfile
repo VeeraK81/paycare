@@ -17,20 +17,20 @@ pipeline {
             }
         }
         
-        // stage('Run Tests') {
-        //     steps {
-        //         script {
-        //             docker.image('paycare_etl:latest').inside {
-        //                 sh 'pytest tests/test_etl.py --junitxml=unit-tests.xml'
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Archive Results') {
-        //     steps {
-        //         junit 'unit-tests.xml'
-        //     }
-        // }
+        stage('Run Tests') {
+            steps {
+                script {
+                    docker.image('paycare_etl:latest').inside {
+                        sh 'pytest tests/test_etl.py --junitxml=unit-tests.xml'
+                    }
+                }
+            }
+        }
+        stage('Archive Results') {
+            steps {
+                junit 'unit-tests.xml'
+            }
+        }
         // stage('Run Unit Tests') {
         //     steps {
         //         sh 'pytest tests/tests.py --junitxml=unit-tests.xml'
