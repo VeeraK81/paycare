@@ -18,12 +18,14 @@ def transform_data(data):
     try:
         # Drop rows with missing values
         data_cleaned = data.dropna()
+        print("data_cleaned", data_cleaned)
         
         # Add a new column for Tax (assuming a flat 10% tax rate on salary)
         data_cleaned['tax'] = data_cleaned['salary'] * 0.1
-        
+        print("data_cleaned['tax']", data_cleaned['tax'])
         # Calculate net salary after tax
         data_cleaned['net_salary'] = data_cleaned['salary'] - data_cleaned['tax']
+        print("data_cleaned['net_salary']", data_cleaned['net_salary'])
         
         print("Data transformation successful.")
         return data_cleaned
